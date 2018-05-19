@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="myusuf.hackergame.InfectNodeActivity">
+
+    <FrameLayout
+        android:id="@+id/infectedFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/hackerbackground">
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/infectNodeText"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp"
+        android:gravity="center"
+        android:text="Which Node Would You Like To Infect?"
+        android:fontFamily="@font/aldrich"
+        android:textColor="#FFFF"
+        android:textSize="30dp" />
+
+    <ImageButton
+        android:id="@+id/node1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/node4"
+        android:layout_below="@+id/infectNodeText"
+        android:layout_marginTop="35dp"
+        android:background="#0000"
+        android:src="@drawable/node" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/node4"
+        android:layout_below="@+id/infectNodeText"
+        android:layout_marginTop="35dp"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="1"/>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node6"
+        android:layout_toEndOf="@+id/node8"
+        android:background="#0000"
+        android:src="@drawable/node"
+        android:id="@+id/node9" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node6"
+        android:layout_toEndOf="@+id/node8"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="9"/>
+
+    <ImageButton
+        android:id="@+id/node10"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node9"
+        android:layout_toEndOf="@+id/node7"
+        android:background="#0000"
+        android:src="@drawable/node" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node9"
+        android:layout_toEndOf="@+id/node7"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="10"/>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node4"
+        android:layout_toStartOf="@+id/node8"
+        android:background="#0000"
+        android:src="@drawable/node"
+        android:id="@+id/node7" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node4"
+        android:layout_toStartOf="@+id/node8"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="7"/>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node6"
+        android:layout_centerHorizontal="true"
+        android:background="#0000"
+        android:src="@drawable/node"
+        android:id="@+id/node8" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node6"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="8"/>
+
+    <ImageButton
+        android:id="@+id/node6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node2"
+        android:layout_toEndOf="@+id/node2"
+        android:background="#0000"
+        android:src="@drawable/node" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node2"
+        android:layout_toEndOf="@+id/node2"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="6"/>
+
+    <ImageButton
+        android:id="@+id/node4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node1"
+        android:layout_toStartOf="@+id/node5"
+        android:background="#0000"
+        android:src="@drawable/node" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_below="@+id/node1"
+        android:layout_toStartOf="@+id/node5"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="4"/>
+
+    <ImageButton
+        android:id="@+id/node5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/node10"
+        android:layout_below="@+id/node1"
+        android:background="#0000"
+        android:src="@drawable/node" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/node10"
+        android:layout_below="@+id/node1"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="5"/>
+
+    <ImageButton
+        android:id="@+id/node2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/node8"
+        android:layout_alignTop="@+id/node3"
+        android:background="#0000"
+        android:src="@drawable/node" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/node8"
+        android:layout_alignTop="@+id/node3"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="2"/>
+
+    <ImageButton
+        android:id="@+id/node3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/node1"
+        android:layout_toEndOf="@+id/node2"
+        android:background="#0000"
+        android:src="@drawable/node" />
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/node1"
+        android:layout_toEndOf="@+id/node2"
+        android:clickable="false"
+        android:textSize="20pt"
+        android:textColor="#FFFF"
+        android:text="3"/>
+</RelativeLayout>

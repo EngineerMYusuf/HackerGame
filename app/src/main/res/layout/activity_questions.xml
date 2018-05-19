@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="myusuf.hackergame.QuestionsActivity">
+
+    <FrameLayout
+        android:id="@+id/questionFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/matbackground">
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/answerList"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/questionText">
+    </ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="69dp"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:fontFamily="@font/aldrich"
+        android:text="Question 1"
+        android:id="@+id/questionNumber" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/questionNumber"
+        android:gravity="center"
+        android:fontFamily="@font/aldrich"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec erat bibendum, hendrerit ipsum vel, egestas sem. Suspendisse potenti. Suspendisse."
+        android:textSize="20sp"
+        android:id="@+id/questionText" />
+
+
+
+</RelativeLayout>

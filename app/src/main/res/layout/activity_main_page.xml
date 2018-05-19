@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="myusuf.hackergame.MainPage">
+
+    <FrameLayout
+        android:id="@+id/mainFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/policebackground">
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/startGame"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:background="#0000"
+        android:src="@drawable/tick170" />
+
+    <TextView
+        android:id="@+id/sessionIDText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp"
+        android:gravity="center"
+        android:text="Enter Session ID"
+        android:textColor="#FFFF"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/policeText"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/role"
+        android:layout_alignBottom="@+id/role"
+        android:layout_toStartOf="@+id/sessionID"
+        android:fontFamily="@font/aldrich"
+        android:gravity="center"
+        android:text="Police"
+        android:textColor="#6666ff"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/hackerText"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/role"
+        android:layout_alignBottom="@+id/role"
+        android:layout_toEndOf="@+id/sessionID"
+        android:fontFamily="@font/aldrich"
+        android:gravity="center"
+        android:textColor="#ff6666"
+        android:text="Hacker"
+        android:textSize="30dp" />
+
+    <Switch
+        android:id="@+id/role"
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_above="@+id/startGame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp" />
+
+    <EditText
+        android:id="@+id/sessionID"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/sessionIDText"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="78dp"
+        android:textColor="#FFFF" />
+
+</RelativeLayout>
