@@ -15,7 +15,7 @@ public class AnswerListAdapter extends ArrayAdapter<answers> {
     private ArrayList<answers> answers = new ArrayList<>();
 
     public AnswerListAdapter(Context context, ArrayList<answers> values) {
-        super(context, R.layout.rowlayout, values);
+        super(context, R.layout.answerlayout, values);
         this.context = context;
         this.answers = values;
     }
@@ -27,8 +27,8 @@ public class AnswerListAdapter extends ArrayAdapter<answers> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.answerlayout, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.image);
+        TextView textView = (TextView) rowView.findViewById(R.id.answerText);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.ansCheckbox);
 
         textView.setText(d.getText());
         if (d.isChosen()){

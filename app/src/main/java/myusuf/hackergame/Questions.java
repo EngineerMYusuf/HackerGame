@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class Questions {
     ArrayList<String> questions;
-    ArrayList<ArrayList<String>> answers;
+    ArrayList<ArrayList<answers>> answers;
     public Questions(){
         questions = new ArrayList<>();
         answers = new ArrayList<>();
+        ArrayList<answers> ans;
         questions.add("What is love?");
         questions.add("Who is you?");
         questions.add("Test Question 1?");
@@ -17,48 +18,65 @@ public class Questions {
         questions.add("Test Question 5?");
         questions.add("Test Question 6?");
 
-        answers.get(0).add("TBaby don't hurt me");
-        answers.get(0).add("Don't hurt me");
-        answers.get(0).add("No more");
-        answers.get(0).add("IDK maaan");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(1).add("TYou is you");
-        answers.get(1).add("We is you");
-        answers.get(1).add("No one is you");
-        answers.get(1).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(2).add("TYou is you");
-        answers.get(2).add("We is you");
-        answers.get(2).add("No one is you");
-        answers.get(2).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(3).add("TYou is you");
-        answers.get(3).add("We is you");
-        answers.get(3).add("No one is you");
-        answers.get(3).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(4).add("TYou is you");
-        answers.get(4).add("We is you");
-        answers.get(4).add("No one is you");
-        answers.get(4).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(5).add("TYou is you");
-        answers.get(5).add("We is you");
-        answers.get(5).add("No one is you");
-        answers.get(5).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(6).add("TYou is you");
-        answers.get(6).add("We is you");
-        answers.get(6).add("No one is you");
-        answers.get(6).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
 
-        answers.get(7).add("TYou is you");
-        answers.get(7).add("We is you");
-        answers.get(7).add("No one is you");
-        answers.get(7).add("Change subject");
+        ans = new ArrayList<>();
+        ans.add(new answers(true,"Baby dont hurt me"));
+        ans.add(new answers(false,"Don't hurt me"));
+        ans.add(new answers(false,"No more"));
+        ans.add(new answers(false,"IDK maaan"));
+        answers.add(ans);
+
     }
 
-    public ArrayList<ArrayList<String>> getAnswers() {
+    public ArrayList<ArrayList<answers>> getAnswers() {
         return answers;
     }
 

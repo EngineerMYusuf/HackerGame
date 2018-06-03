@@ -7,10 +7,20 @@ package myusuf.hackergame;
 public class answers {
     private boolean chosen;
     private String text;
+    private boolean correct;
 
-    public answers(boolean chosen, String text){
+    public answers(boolean correct, String text){
         this.text = text;
-        this.chosen = chosen;
+        this.chosen = false;
+        this.correct = correct;
+    }
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
     }
 
     public boolean isChosen() {

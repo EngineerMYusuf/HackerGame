@@ -25,77 +25,47 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-public class QuestionsActivity extends AppCompatActivity {
-
+public class AdminActivity extends AppCompatActivity {
     private final static int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
 
     BluetoothManager btManager;
     BluetoothAdapter btAdapter;
     BluetoothLeScanner btScanner;
-    BluetoothLeAdvertiser btAdvertiser;
-    boolean won;
-    boolean retry = false;
-    boolean hacker;
-    int questionCount;
-    FrameLayout frame;
-    AnswerListAdapter adapter;
-    ListView answersList;
-    ArrayList<answers> myList;
-    Questions questions;
-    ArrayList<String> questionsList;
-    ArrayList<ArrayList<answers>> answerList;
-    int randomNumbers;
-    Random rnd = new Random();
-    boolean answerIsTrue = false;
-    boolean answerCame = false;
-    TextView questionNumber;
-    TextView questiontxt;
-    int ans;
-    boolean gameEnded;
-    Integer sessionID;
+    ScoreListAdapter adapter;
+    ArrayList<Integer> myList;
+    ListView scoresList;
     BluetoothDevice bluetoothDevice;
     boolean mConnected;
     BluetoothGatt mGatt;
     UUID SERVICE_MY_UUID;
     UUID CHARACTERISTIC_MY_UUID;
-    UUID SERVICE_READ_UUID;
-    UUID CHARACTERISTIC_READ_UUID;
-    boolean mInitialized;
+    UUID SERVICE_WRITE_UUID;
+    UUID CHARACTERISTIC_WRITE_UUID;
+    UUID SERVICE_BT_UUID;
+    UUID CHARACTERISTIC_BT_UUID;
+    boolean retry;
     BluetoothGattService myservice;
     BluetoothGattCharacteristic mycharacteristic;
-    BluetoothGattCharacteristic readcharacteristic;
-    boolean correct;
-    byte node;
-    boolean found = false;
-
-
     private ScanCallback leScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             if (!(result.getDevice().getName() == null)) {
                 Log.d("BLEScan", "Scanned and found: " + result.getDevice().getName() + " @ " + result.getDevice().getAddress());
-                if (result.getDevice().getAddress().substring(6).equals("28:46:73:23") && result.getRssi() > -70) {
-                    //Log.d("Found device", "Found our device");
+                if (result.getDevice().getAddress().equals("00:01:28:46:73:23")) {
+                    Log.d("Found device", "Found Central Device");
                     stopScanning();
-                    if(!found){
-                        found = true;
-                        bluetoothDevice = result.getDevice();
-                        connectDevice(bluetoothDevice);
-                    }
-                    else{
-                        //Log.d("SCAN", "Already found ma man");
-                    }
+                    bluetoothDevice = result.getDevice();
+                    connectDevice(bluetoothDevice);
                 }
             }
         }
@@ -129,50 +99,49 @@ public class QuestionsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questions);
-        hacker = getIntent().getBooleanExtra("HACKER", true);
-        node = getIntent().getByteExtra("NODE", (byte) 0x00);
-        int k = getIntent().getIntExtra("SESSION_ID", 99);
-        sessionID = k;
-        frame = findViewById(R.id.questionFrame);
-
+        setContentView(R.layout.activity_admin);
         byte[] buf = new byte[16];
-        buf[0] = (byte) 0xE6;
-        buf[1] = (byte) 0xC4;
-        buf[2] = (byte) 0x4C;
-        buf[3] = (byte) 0xFF;
-        buf[4] = (byte) 0xE3;
-        buf[5] = (byte) 0x04;
-        buf[6] = (byte) 0x47;
-        buf[7] = (byte) 0xE2;
 
-        buf[8] = (byte) 0xAC;
-        buf[9] = (byte) 0xE0;
-        buf[10] = (byte) 0x0C;
-        buf[11] = (byte) 0x90;
-        buf[12] = (byte) 0xD7;
-        buf[13] = (byte) 0x29;
-        buf[14] = (byte) 0xE0;
-        buf[15] = (byte) 0xF7;
+        buf[0] = (byte) 0x6B;
+        buf[1] = (byte) 0x96;
+        buf[2] = (byte) 0x2C;
+        buf[3] = (byte) 0xAE;
+        buf[4] = (byte) 0x2C;
+        buf[5] = (byte) 0xEA;
+        buf[6] = (byte) 0x4C;
+        buf[7] = (byte) 0x43;
+        buf[8] = (byte) 0xB1;
+        buf[9] = (byte) 0x66;
+        buf[10] = (byte) 0x07;
+        buf[11] = (byte) 0x51;
+        buf[12] = (byte) 0x08;
+        buf[13] = (byte) 0xB5;
+        buf[14] = (byte) 0xB5;
+        buf[15] = (byte) 0xD1;
         SERVICE_MY_UUID = byteToUUID(buf);
 
-        buf[0] = (byte) 0x09;
-        buf[1] = (byte) 0x6F;
-        buf[2] = (byte) 0x3D;
-        buf[3] = (byte) 0x98;
-        buf[4] = (byte) 0x1F;
-        buf[5] = (byte) 0x90;
-        buf[6] = (byte) 0x49;
-        buf[7] = (byte) 0xF9;
-        buf[8] = (byte) 0xB1;
-        buf[9] = (byte) 0x1D;
-        buf[10] = (byte) 0x22;
+        buf[0] = (byte) 0x45;
+        buf[1] = (byte) 0x26;
+        buf[2] = (byte) 0x3B;
+        buf[3] = (byte) 0xCB;
+        buf[4] = (byte) 0xFA;
+        buf[5] = (byte) 0xFB;
+        buf[6] = (byte) 0x41;
+        buf[7] = (byte) 0x8C;
+        buf[8] = (byte) 0xBD;
+        buf[9] = (byte) 0xDC;
+        buf[10] = (byte) 0x44;
         buf[11] = (byte) 0x28;
-        buf[12] = (byte) 0x6B;
-        buf[13] = (byte) 0xF3;
-        buf[14] = (byte) 0x0C;
-        buf[15] = (byte) 0x21;
-        CHARACTERISTIC_READ_UUID = byteToUUID(buf);
+        buf[12] = (byte) 0x1C;
+        buf[13] = (byte) 0x5C;
+        buf[14] = (byte) 0xB9;
+        buf[15] = (byte) 0xF7;
+        CHARACTERISTIC_MY_UUID = byteToUUID(buf);
+
+        myList = new ArrayList<>();
+        adapter = new ScoreListAdapter(this, myList);
+        scoresList = findViewById(R.id.sList);
+        scoresList.setAdapter(adapter);
 
         btManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         if (btManager.getAdapter() != null && !btManager.getAdapter().isEnabled()) {
@@ -196,62 +165,34 @@ public class QuestionsActivity extends AppCompatActivity {
             });
             builder.show();
         }
-        if (hacker) {
-            frame.setBackgroundResource(R.drawable.hackerbackground);
-        } else {
-            frame.setBackgroundResource(R.drawable.policebackground);
-        }
-        myList = new ArrayList<>();
-        answersList = findViewById(R.id.answerList);
-        adapter = new AnswerListAdapter(this, myList);
-        answersList.setAdapter(adapter);
-
-        randomNumbers = rnd.nextInt(8);                                                     // question count + 1
-        questiontxt = findViewById(R.id.questionText);
-        questionNumber = findViewById(R.id.questionNumber);
-
-        answersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Button getScores = findViewById(R.id.getScores);
+        getScores.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1,
-                                    int position, long id) {
-                Log.d("progress", "You have clicked the ID: " + id + " Position: " + position);
-                                                                                                    // ToDo maybe wait?
-                if (position == ans) {
-                    Toast.makeText(getApplicationContext(), "Answer is true", Toast.LENGTH_SHORT).show();
-                    doCorrectTask();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Answer is wrong", Toast.LENGTH_LONG).show();
-                    doWrongTask();
-                }
+            public void onClick(View v) {
+                Log.d("Scores", "Getting Scores");
+                myList = new ArrayList<>();
+                adapter = new ScoreListAdapter(getApplicationContext(), myList);
+                scoresList.setAdapter(adapter);
+                startScanning();
             }
         });
-        showQuestion(randomNumbers);
     }
 
-    public void showQuestion(int random) {
-        questions = new Questions();
-        questionsList = questions.getQuestions();
-        answerList = questions.getAnswers();
-        String qText = questionsList.get(random);
-        for (int j = 0; j < 4; j++) {
-            answers a = answerList.get(random).get(j);
-            if (a.isCorrect()) {
-                ans = j;
+    private void setText() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter = new ScoreListAdapter(getApplicationContext(), myList);
+                scoresList.setAdapter(adapter);
             }
-
-            myList.add(a);
-        }
-        setText(questionNumber, questiontxt, "Question", qText);
+        });
     }
-
-    public void doCorrectTask() {
-        correct = true;
-        startScanning();
-    }
-
-    public void doWrongTask() {
-        correct = false;
-        startScanning();
+    public void addItemToList(byte newScore) {
+        //Log.d("progress", "adding new Device Named: " + newDevice.getResult().getDevice().getName());
+        int k = (newScore & 0xFF) - 50;
+        Log.d("SCORE",String.valueOf(k));
+        myList.add(k);
+        setText();
     }
 
     public void disconnectGattServer() {
@@ -274,67 +215,38 @@ public class QuestionsActivity extends AppCompatActivity {
         t.execute();
     }
 
-    private boolean sendMessage() {
-        if (!mConnected || !mInitialized) {
-            Log.d("GATT", "Problem Sending Message: " + mConnected + " " + mInitialized);
-            return false;
-        }
-        byte[] data = new byte[3];
-        data[0] = (byte) 0x94;
-        data[1] = sessionID.byteValue();
-        if (correct) {
-            if (hacker) {
-                // this is the hacker (0x1NODE)
-                data[2] = (byte) (node + 0x10);
-            } else {
-                // this is the police (0x0NODE)
-                data[2] = (byte) (node + 0x00);
-            }
-        } else {
-            // this can be anyone
-            data[2] = (byte) 0x20;
-        }
-        Log.d("CHAR DATA","Setting Char to: " + data[0] + " " + data[1] + " " + data[2]);
-        mycharacteristic.setValue(data);
-        Log.d("SET","setValue");
-        return mGatt.writeCharacteristic(mycharacteristic);
-    }
-
     private void connectDevice(BluetoothDevice device) {
         GattClientCallback gattClientCallback = new GattClientCallback();
         mGatt = device.connectGatt(this, false, gattClientCallback);
     }
 
-    private void setText(final TextView t1, final TextView t2, final String v1, final String v2) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                t1.setText(v1);
-                t2.setText(v2);
-                adapter = new AnswerListAdapter(getApplicationContext(), myList);
-                answersList.setAdapter(adapter);
-            }
-        });
+    private boolean readMessage(BluetoothGattCharacteristic characteristic){
+        byte[] data;
+        data = characteristic.getValue();
+        Log.d("DATA LENGTH", "Data length: " + data.length);
+        for(int i = 0; i < data.length; i++){
+            Log.d("BYTE", String.valueOf(data[i]));
+        }
+        processScores(data);
+        return true;
     }
 
-    public void goToScan() {
-        Intent intent = new Intent(getApplicationContext(), ScannerActivity.class);
-        intent.putExtra("SESSION_ID", sessionID);
-        startActivity(intent);
+    private void processScores(byte[] data){
+        byte[] b = new byte[10];
+        for(int i = 0; i < 10; i++){
+            b[i] = data[i];
+        }
+        for (byte aData : b) {
+            addItemToList(aData);
+        }
     }
 
-    public void goToInfect() {
-        Intent intent = new Intent(getApplicationContext(), InfectNodeActivity.class);
-        intent.putExtra("SESSION_ID", sessionID);
-        startActivity(intent);
-    }
 
     private class GattClientCallback extends BluetoothGattCallback {
-        @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
             if (status == BluetoothGatt.GATT_FAILURE) {
-                Log.d("GATT", "Faliure");
+                Log.d("GATT", "Failure");
                 disconnectGattServer();
                 try {
                     wait(500);
@@ -363,52 +275,47 @@ public class QuestionsActivity extends AppCompatActivity {
                 if(retry){
                     Log.d("RETRY","Retrying");
                     retry = false;
-                    found = false;
                     startScanning();
                 }
                 else{
                     Log.d("RETRY", "Dont have to retry");
                 }
-                //disconnectGattServer();
             }
         }
 
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             super.onServicesDiscovered(gatt, status);
+            Log.d("WEIRD","1");
             if (status != BluetoothGatt.GATT_SUCCESS) {
+                Log.d("SERVICE","No Success");
                 return;
             }
+            Log.d("WEIRD","2");
             myservice = gatt.getService(SERVICE_MY_UUID);
-            mycharacteristic = myservice.getCharacteristic(CHARACTERISTIC_READ_UUID);
-            mycharacteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
-            mInitialized = gatt.setCharacteristicNotification(mycharacteristic, false);
-            Log.d("SERVICE","Sending Message...");
-            boolean b = sendMessage();
-            if(!b){
-                Log.d("SUCC","WRONG");
-                retry = true;
-                disconnectGattServer();
+            Log.d("UUID", myservice.getUuid().toString());
+            Log.d("SERVICE","Before service1");
+            mycharacteristic = myservice.getCharacteristic(CHARACTERISTIC_MY_UUID);
+            Log.d("UUID", mycharacteristic.getUuid().toString());
+            if(mycharacteristic != null){
+                Log.d("QUE", "WE OK");
             }
-            else{
-                Log.d("SUCC","RIGHT");
-            }
+            gatt.readCharacteristic(mycharacteristic);
+            Log.d("SERVICE","Reading Message...");
         }
 
         @Override
-        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            super.onCharacteristicWrite(gatt, characteristic, status);
-            Log.d("GATT", "Char written");
-            disconnectGattServer();
-            found = false;
-            if (correct) {
-                finish();
-            } else {
-                randomNumbers = rnd.nextInt(8);
-                showQuestion(randomNumbers);
+        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            super.onCharacteristicRead(gatt, characteristic, status);
+            if(status == BluetoothGatt.GATT_SUCCESS){
+                Log.d("GATT","Char Read");
             }
+            else{
+                Log.d("GATT","FAIL");
+            }
+            readMessage(mycharacteristic);
+            disconnectGattServer();
         }
     }
-
     private class StartScanTask extends AsyncTask<Void, Integer, Void> {
 
         @Override
@@ -428,5 +335,4 @@ public class QuestionsActivity extends AppCompatActivity {
             return null;
         }
     }
-
 }

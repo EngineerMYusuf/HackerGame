@@ -28,11 +28,14 @@ public class DeviceListAdapter extends ArrayAdapter<mDevice> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
+        TextView textName = (TextView) rowView.findViewById(R.id.labelName);
+        TextView textRSSI = (TextView) rowView.findViewById(R.id.labelRSSI);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.image);
 
-        String str = "Name: " + d.getResult().getDevice().getName() + " RSSI: " + d.getRssi();
-        textView.setText(str);
+        String str = "Node " + d.getResult().getDevice().getAddress().substring(0,2);
+        textName.setText(str);
+        str = "Signal Strength: " + (d.getRssi() + 100);
+        textRSSI.setText(str);
         if (d.isInfected()){
             imageView.setImageResource(R.drawable.red);
         } else {

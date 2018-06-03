@@ -1,21 +1,18 @@
 package myusuf.hackergame;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainPage extends AppCompatActivity {
     final String TAG = "Main Page";
@@ -24,13 +21,22 @@ public class MainPage extends AppCompatActivity {
     int id;
     EditText sessionID;
 
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        TextView sessionIDText = findViewById(R.id.sessionIDText);
+        final TextView sessionIDText = findViewById(R.id.sessionIDText);
         sessionID = findViewById(R.id.sessionID);
 
         f = findViewById(R.id.mainFrame);
@@ -52,39 +58,50 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Log.d(TAG, "Starting Game");
-
-                if(hacker){
-                    id = Integer.parseInt(sessionID.getText().toString());
-                    Class c = InfectNodeActivity.class;
-                    launchActivity(id,c);
+                Class c;
+                if(sessionID.getText().toString().equals("myk")){
+                    c = AdminActivity.class;
+                    launchActivity(id, c);
                 }
-                else{
-                    id = Integer.parseInt(sessionID.getText().toString());
-                    Class c = ScannerActivity.class;
-                    launchActivity(id,c);
+                else {
+                    if (isInteger(sessionID.getText().toString())) {
+                        if (hacker) {
+                            id = Integer.parseInt(sessionID.getText().toString());
+                            c = InfectNodeActivity.class;
+                            launchActivity(id, c);
+                        } else {
+                            id = Integer.parseInt(sessionID.getText().toString());
+                            c = ScannerActivity.class;
+                            launchActivity(id, c);
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please enter a number", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
 
     }
-    public void userIsHacker(){
+
+    public void userIsHacker() {
         hacker = true;
         f.setBackgroundResource(R.drawable.hackerbackground);
     }
-    public void userIsPolice(){
+
+    public void userIsPolice() {
         hacker = false;
         f.setBackgroundResource(R.drawable.policebackground);
     }
-    public void launchActivity(int id, Class c){
+
+    public void launchActivity(int id, Class c) {
         Intent intent = new Intent(this, c);
-        if(hacker){
-            intent.putExtra("HACKER",true);
+        if (hacker) {
+            intent.putExtra("HACKER", true);
+        } else {
+            intent.putExtra("HACKER", false);
         }
-        else{
-            intent.putExtra("HACKER",false);
-        }
-        intent.putExtra("SESSION_ID",id);
+        intent.putExtra("SESSION_ID", id);
         startActivity(intent);
     }
 }

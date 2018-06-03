@@ -4,24 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="myusuf.hackergame.EndGameActivity">
+    tools:context="myusuf.hackergame.AdminActivity">
+
     <FrameLayout
-        android:id="@+id/endGameFrame"
+        android:id="@+id/mainFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/hackerbackground">
+        android:background="@drawable/matbackground">
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/endGameTxt"
+    <ListView
+        android:id="@+id/sList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:text="You Have Won!"
-        android:gravity="center"
-        android:textSize="80sp"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/aldrich"/>
+        android:layout_below="@+id/getScores">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/getScores"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="GET" />
 
 </RelativeLayout>
